@@ -1,1 +1,4 @@
 bazel-*
+*.swp
+test/savedmodel-*/
+test/saved_model/
