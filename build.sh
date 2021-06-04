@@ -1,7 +1,7 @@
 #!/bin/bash
 
 set -x
-set errexit=1
+set -o errexit
 
 export TF_CPP_MIN_LOG_LEVEL="1"
 

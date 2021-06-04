@@ -19,6 +19,7 @@ cc_library(
         "@org_tensorflow//tensorflow/core:lib",
         "@org_tensorflow//tensorflow/core:protos_all_cc",
         "@org_tensorflow//tensorflow/core:tensorflow",
+        "@org_tensorflow//tensorflow/cc/saved_model:tag_constants"
     ],
 )
 
