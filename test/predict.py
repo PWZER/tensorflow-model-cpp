@@ -14,9 +14,15 @@ def predict_v1():
         tf.saved_model.load(
             sess, [tf.saved_model.tag_constants.SERVING], "./savedmodel-v1"
         )
-        ress = sess.run(["embedding_lookup/Identity_1:0", "Identity:0"],
-                        feed_dict={"Placeholder:0": [10, 20]})
+        ress = sess.run(
+            fetches=[
+                "embedding_lookup/Identity_1:0",
+                "embedding_lookup_weight/Read/ReadVariableOp:0",
+            ],
+            feed_dict={"input:0": [10, 20]},
+        )
         res = ress[1]
+        print(res[0].tolist())
         print(res.shape, res.dtype)
 
 

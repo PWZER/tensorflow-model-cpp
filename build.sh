@@ -13,7 +13,8 @@ sed -i.bak "s@__EXEC_ROOT__@${execroot}@" "${outfile}"
 echo "Compilation Database: ${outfile}"
 
 # Step 2 build model_test
-bazel build //model_test:model_test
+# bazel build --config debug //model_test:model_test --verbose_failures
+bazel build --config nativeopt //model_test:model_test --verbose_failures
 
 # Step 3 run
 ./bazel-bin/model_test/model_test test/savedmodel-v1/

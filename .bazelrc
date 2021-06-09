@@ -14,6 +14,11 @@ build:nativeopt --copt=-march=native
 build:nativeopt --host_copt=-march=native
 build:nativeopt --copt=-O3
 
+# build debug mode
+build:debug -c dbg
+build:debug --copt="-g"
+build:debug --strip="never"
+
 build --keep_going
 build --verbose_failures=true
 build --spawn_strategy=standalone

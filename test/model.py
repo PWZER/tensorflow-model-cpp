@@ -9,12 +9,12 @@ parser.add_argument("version", nargs="+", default="v1", choices=["v1", "v2"])
 args = parser.parse_args()
 
 
-def gen_params():
+def gen_params(value=0.1):
     params = []
     for i in range(256):
         row = []
         for j in range(10):
-            row.append(float(i) + float(j) * 0.1)
+            row.append(float(i) + float(j) * value)
         params.append(row)
     return params
 
@@ -42,18 +42,11 @@ def gen_v1_model():
             outputs={"output": tf.saved_model.build_tensor_info(output)},
             method_name=tf.saved_model.signature_constants.PREDICT_METHOD_NAME,
         )
-        embedding_signature = tf.saved_model.signature_def_utils.build_signature_def(
-            outputs={
-                "embedding_lookup_weight": tf.saved_model.build_tensor_info(params.read_value()),
-            },
-            method_name=tf.saved_model.signature_constants.PREDICT_METHOD_NAME,
-        )
         builder.add_meta_graph_and_variables(
             sess,
             [tf.saved_model.tag_constants.SERVING],
             signature_def_map={
                 "predict": predict_signature,
-                "embedding": embedding_signature,
             },
             assets_collection=None,
         )
